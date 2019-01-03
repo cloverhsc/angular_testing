@@ -1,27 +1,32 @@
 import { Injectable } from '@angular/core';
 
+import { DemodependService } from './demodepend.service';
+
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DemoService {
   protected value = 'Hi Clover';
-  constructor() { }
+  constructor(private depServ: DemodependService) {
+  }
 
   getValue() { return this.value; }
   setValue(value: string) { this.value = value; }
   getObservableValue() { return of('observable Clover'); }
   getPromiseValue(): Promise<string> {
-    const one = new Promise<string>((resolve, reject) => {
-      setTimeout(() =>
-        resolve('promise Clover'), 1000);
-    });
-    return one;
+    return Promise.resolve('promise Clover');
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  /**
+   * show DemodependService value.
+   */
+  showDepValue() {
+    return this.depServ.giveValue();
   }
 }
