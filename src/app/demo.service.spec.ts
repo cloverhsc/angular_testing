@@ -37,7 +37,7 @@ describe('DemoService', () => {
 describe('isAuthenticated testing', () => {
   let service: DemoService;
   beforeEach(() => {
-    service = new DemoService();
+    service = new DemoService(new DemodependService());
   });
 
   afterEach(() => {

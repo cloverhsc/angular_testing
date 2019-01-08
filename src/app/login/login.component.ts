@@ -37,7 +37,11 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.log(`email: ${this.loginForm.value.email}`);
     console.log(`email: ${this.loginForm.value.password}`);
-    this.demo.getPromiseValue().then( value => console.log(value));
+    if (this.demo.isAuthenticated()) {
+      alert('login success');
+    } else {
+      alert('login failed!');
+    }
   }
 
 }

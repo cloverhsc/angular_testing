@@ -11,7 +11,7 @@ import { of } from 'rxjs';
 import { MyhttpService, DataForm } from './myhttp.service';
 
 
-describe('MyhttpService by SpyOn', () => {
+xdescribe('MyhttpService by SpyOn', () => {
   let myhttpServ: MyhttpService;
 
   beforeEach( () => {
@@ -42,7 +42,7 @@ describe('MyhttpService by SpyOn', () => {
 });
 
 
-describe('MyhttpService by createSpyObj', () => {
+xdescribe('MyhttpService by createSpyObj', () => {
   let httpClientSpy: { get: jasmine.Spy };
   let myhttpServ: MyhttpService;
 
