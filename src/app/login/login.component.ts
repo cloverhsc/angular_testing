@@ -12,6 +12,8 @@ import { DemoService } from './../demo.service';
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
+  public isAuthenticated = false;   // 切換 登入前/登入後 頁面使用
+
   constructor(
     private fb: FormBuilder,
     private demo: DemoService
@@ -35,13 +37,32 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(`email: ${this.loginForm.value.email}`);
-    console.log(`email: ${this.loginForm.value.password}`);
-    if (this.demo.isAuthenticated()) {
-      alert('login success');
-    } else {
-      alert('login failed!');
-    }
+    localStorage.setItem('token', JSON.stringify({
+      email: this.loginForm.value.email}));
+
+    // // sync authenticated
+    // if (this.demo.isAuthenticated()) {
+    //   this.isAuthenticated = true;
+    // } else {
+    //   this.isAuthenticated = false;
+    // }
+
+    // rxjs style
+    this.demo.asynAuthenticated().subscribe(
+      res => {
+        if (res) {
+          this.isAuthenticated = true;
+        } else {
+          this.isAuthenticated = false;
+        }
+      }
+    );
+
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.isAuthenticated = false;
   }
 
 }

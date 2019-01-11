@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { DemodependService } from './demodepend.service';
 
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,12 @@ export class DemoService {
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  // rxjs style
+  asynAuthenticated(): Observable<boolean> {
+    return of(!!localStorage.getItem('token'))
+    .pipe(delay(3000));
   }
 
   /**

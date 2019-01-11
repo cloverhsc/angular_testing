@@ -10,7 +10,7 @@ col-md-12 col-lg-12">
     </article>
 
     <section class="loginData col-xs-12 col-sm-12 col-md-12 col-lg-12"
-    id="loginData">
+    id="loginData" *ngIf="!isAuthenticated" >
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"
       id="loginForm">
         <div  class="form-group input-group col-xs-12 col-sm-12
@@ -31,6 +31,15 @@ col-md-12 col-lg-12">
           登入
         </button>
       </form>
+    </section>
+    <!-- 以上是 form 表單，以下是新增的登入後畫面 -->
+    <section class="logout col-xs-12 col-sm-12 col-md-12 col-lg-12"
+    id="logout" *ngIf="isAuthenticated" >
+      <h3>你好：
+        <span id="userEmail">{{this.loginForm.value.email}}</span>
+      </h3>
+      <button class="btn btn-primary col-xs-12 col-sm-12 col-md-12 col-lg-12"
+        (click)="logout()" id="logoutBtn">登出</button>
     </section>
   </div>
 </section>
